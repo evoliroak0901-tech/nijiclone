@@ -3,16 +3,10 @@ import { GoogleGenAI } from "@google/genai";
 import { CharacterAttributes, StyleCoordinates, PoseOption } from "../types";
 
 const getClient = () => {
-    // 1. Check Local Storage (BYOK)
+    // Check Local Storage (BYOK)
     const localKey = localStorage.getItem('GEMINI_API_KEY');
     if (localKey) {
         return new GoogleGenAI({ apiKey: localKey });
-    }
-
-    // 2. Check Environment Variable (Dev fallback)
-    const envKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
-    if (envKey) {
-        return new GoogleGenAI({ apiKey: envKey });
     }
 
     throw new Error("APIキーが設定されていません。「あなた」タブからAPIキーを設定してください。");
